@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Awareness and Prevention System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            box-sizing: border-box;
+            background-image: url('logo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        header {
+            background-color: rgba(228, 10, 54, 0.8); 
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        header img {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100px;
+            height: auto;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin: 5px 0;
+            font-size: 1.2rem;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: rgba(52, 58, 64, 0.8);
+            padding: 12px;
+        }
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+        	display: none;
+            margin-bottom: 40px;
+            display: none;
+        }
+        .welcome-section {
+            text-align: center;
+            padding: 30px;
+            background-color: rgba(233, 236, 239, 0.9); 
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form input, .form textarea, .form select {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .form button {
+            width: 100%;
+            padding: 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+        }
+        .form button:hover {
+            background: #0056b3;
+        }
+        footer {
+            text-align: center;
+            background: rgba(243, 244, 245, 0.8); 
+            color: rgb(19, 1, 1);
+            padding: 10px 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+        footer p {
+            margin: 0;
+        }
+        .link-button {
+            display: block;
+            margin: 20px auto;
+            padding: 15px;
+            background: #28a745;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            width: 250px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .link-button:hover {
+            background: #218838;
+        }
+
+       
+        .floating-help-button {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+     
+        .help-contact {
+            position: fixed;
+            bottom: 80px;
+            right: 80px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1000;
+        }
+
+        
+        .section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        
+        .cancer-type {
+            margin-bottom: 30px;
+
+        }
+        .cancer-type img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 10px;
+            margin-right: 20px;
+            float: left;
+            align-items: left;
+            
+        }
+        .cancer-type h3 {
+            margin-top: 0;
+        }
+        .cancer-type p {
+            margin: 10px 0;
+        }
+
+       
+        #symptom-select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            font-size: 1rem;
+        }
+        #custom-symptom {
+            width: 70%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            font-size: 1rem;
+        }
+        #symptom-checker button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+        #symptom-checker button:hover {
+            background: #0056b3;
+        }
+        #selected-symptoms-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        #selected-symptoms-list li {
+            background: #f1f1f1;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+        }
+        #symptom-result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <header>  
+        <img src="logo1.webp" alt="CAPES Logo" align="left"> 
+        <h1><b>Cancer Awareness and Prevention System</h1></b>
+        <p>Empowering you with knowledge for a healthier tomorrow</p>
+        <marquee behavior = "scroll" direction="left">
+        CANCER CAN BE PREVENTED TAKE A PRECAUTIONS TODAY
+        <i>YOUR HEALTH IS MORE IMPORTAT PLEASE TAKE CARE</i>
+    </marquee> 
+    </header>
+
+    
+    <nav>
+        <a href="javascript:void(0)" onclick="toggleSection('intro-content')">HOME</a>
+        <a href="javascript:void(0)" onclick="toggleSection('symptom-checker')">SYMPTOMS CHECKER</a>
+        <a href="javascript:void(0)" onclick="toggleSection('Risk-factors')">RISK FACTORS</a>
+        <a href="javascript:void(0)" onclick="toggleSection('preventive-measure')">PREVENTIVE MEASURES</a>
+        <a href="javascript:void(0)" onclick="toggleSection('RESOURCES')">RESOURCES</a>
+    </nav>
+
+    
+    <div class="container">
+        <div class="section intro-content" id="intro-content">
+            <h1>What is CAPES </h1>
+            <p><b>CAPES stands for Cancer Awareness And Prevention System </p></b>
+            <p>This is a system that helps you gain knowledge about cancer diseases, enabling you to understand more about cancer.</p>
+            <p>CAPES provides a platform to assess yourself by checking the symptoms checker section to determine if you have a possibility of cancer or not.</p>
+            <h2><p><i>NOTE: THIS SYSTEM DOES NOT GIVE YOU A DEFINITIVE ANSWER ABOUT WHETHER YOU HAVE CANCER OR NOT. IT ONLY PROVIDES POSSIBLE OUTCOMES. IF YOU HAVE CONCERNS, PLEASE CONSULT A DOCTOR OR MEDICAL PROFESSIONAL FOR TESTS AND DIAGNOSIS.</i></p></h2>
+            <h2> <img src="logo.webp" alt="CAPES Logo" height="50%" width="100px">What is Cancer?</h2> 
+            <p>Cancer is a disease in which abnormal cells divide without control and can invade nearby tissues. It can occur in any part of the body and may spread to other organs through the bloodstream or lymphatic system.</p>
+            <h3>Causes of Cancer</h3>
+            <p>The exact cause of cancer is often unknown, but it can be influenced by a variety of factors, including genetic mutations, environmental factors, lifestyle choices (such as smoking or poor diet), and exposure to harmful chemicals or radiation.</p>
+            
+            <!-- Types of Cancer -->
+            <h2>Types of Cancer</h2>
+            <p>There are several types of cancer which are determined according to the place or area which it can be occured cancer can be occures in <i>BLOOD,SKIN, PROSTATE, LUNG, BREAST AND OTHER PARTS OF BODY</i></p>
+            <div class="cancer-type">
+                <img src="breast cancer.png" alt="Breast Cancer" height="500%" width="100px">
+                <h3>Breast Cancer</h3>
+                <p>Breast cancer is a type of cancer that forms in the cells of the breasts. It is the most common cancer among women worldwide. Early detection through regular mammograms can improve survival rates.</p><br>
+            </div>
+            
+            <div class="cancer-type">
+                <img src="lung cancer.jpg" alt="Lung Cancer" height="500%" width="100px">
+                <h3>Lung Cancer</h3>
+                <p>Lung cancer is a type of cancer that begins in the lungs and is often associated with smoking. It is one of the leading causes of cancer-related deaths globally.</p>
+            </div>
+            <div class="cancer-type">
+                <img src="prostate cancer.jpg" alt="Prostate Cancer" height="500%" width="100px">
+                <h3>Prostate Cancer</h3>
+                <p>Prostate cancer occurs in the prostate gland in men. It is one of the most common types of cancer in men, especially in older age groups.</p>
+            </div>
+            <div class="cancer-type">
+                <img src="skin cancer2.jpg" alt="Skin Cancer" height="500px" width="100%">
+                <h3>Skin Cancer</h3>
+                <p>Skin cancer is the abnormal growth of skin cells, often caused by excessive exposure to UV radiation from the sun or tanning beds. Early detection and treatment are crucial.</p>
+            </div>
+        </div>
+
+        
+        <div class="section" id="symptom-checker" align="center">
+            <h2>Symptom Checker</h2>
+            <p>Select or add symptoms to check your risk level:</p>
+
+           
+            <select id="symptom-select" multiple>
+                <option value="unexplained_weight_loss">Unexplained Weight Loss</option>
+                <option value="fatigue">Fatigue</option>
+                <option value="persistent_pain">Persistent Pain</option>
+                <option value="fever">Fever</option>
+                <option value="night_sweats">Night Sweats</option>
+
+                <option value="breast_lump">Lump in the Breast</option>
+                <option value="nipple_discharge">Nipple Discharge</option>
+                <option value="breast_pain">Breast Pain</option>
+                <option value="skin_changes_breast">Skin Changes on Breast</option>
+
+                <option value="persistent_cough">Persistent Cough</option>
+                <option value="coughing_blood">Coughing Blood</option>
+                <option value="shortness_of_breath">Shortness of Breath</option>
+                <option value="chest_pain">Chest Pain</option>
+
+                <option value="urination_problems">Difficulty Urinating</option>
+                <option value="blood_in_urine">Blood in Urine</option>
+                <option value="erectile_dysfunction">Erectile Dysfunction</option>
+                <option value="pelvic_pain">Pelvic Pain</option>
+
+                <option value="skin_lesion">Skin Lesion or Mole Changes</option>
+                <option value="skin_ulcer">Non-healing Skin Ulcer</option>
+                <option value="itchy_skin">Itchy Skin</option>
+                <option value="skin_redness">Redness or Swelling on Skin</option>
+
+                <option value="bowel_changes">Changes in Bowel Habits</option>
+                <option value="blood_in_stool">Blood in Stool</option>
+                <option value="abdominal_pain">Abdominal Pain</option>
+                <option value="bloating">Bloating</option>
+            </select>
+
+            <div style="margin-top: 20px;">
+                <input type="text" id="custom-symptom" placeholder="Add a symptom not listed above">
+                <button onclick="addCustomSymptom()">Add Symptom</button>
+            </div>
+
+            <div style="margin-top: 20px;" align="center">
+                <h3>Selected Symptoms:</h3>
+                <ul id="selected-symptoms-list"></ul>
+            </div>
+
+            <button onclick="checkSymptoms()">Check Symptoms</button>
+
+            <p id="symptom-result"></p>
+        </div>
+
+        <!-- Risk Factors Section -->
+        <div class="section" id="Risk-factors">
+            <h2>Risk Factors</h2>
+            <p>Understanding the risk factors for cancer can help you take steps to reduce your risk. Below are some common risk factors associated with cancer:</p>
+            <ul>
+                <li><strong><img src="smocking.jpg" alt="Risk Factors Image">Smoking and Tobacco Use</strong> – Smoking is the leading cause of lung cancer and is linked to many other types of cancer, including mouth, throat, and bladder cancer.<p>Smoking tobacco is a major cause of cancer, with tobacco smoke containing numerous carcinogens that damage DNA and increase the risk of developing at least 16 different types of cancer, including lung, mouth, and throat cancers. </p></li>
+                <li><strong><img src="unhealthy diet.jpg" alt="Risk Factors Image">Unhealthy Diet</strong> – A diet high in processed foods, red meat, and low in fruits and vegetables can increase the risk of colorectal and stomach cancer. <p>An unhealthy diet, especially one high in processed meats, red meat, and sugar, and low in fiber, increases the risk of developing various cancers, including colorectal, breast, and endometrial cancers.</p></li>
+                <li><strong><img src="lack of excercise.jpg" alt="Risk Factors Image">Lack of Physical Activity</strong> – Sedentary lifestyles are associated with an increased risk of breast, colon, and prostate cancer.<p>Physical inactivity increases your risk of bowel cancer and breast cancer, and possibly prostate, uterine and lung cancer. Being inactive also contributes to weight gain. Being overweight or obese also increases cancer risk. The good news is you can lower your cancer risk by being physically active.</p></li>
+                <li><strong><img src="genetic factors.jpg" alt="Risk Factors Image">Genetic Factors</strong> – Family history of cancer can increase your risk, especially for breast, ovarian, and colorectal cancers.<p>. It is caused by changes in genes that control the way cells grow and multiply. Cells are the building blocks of your body. Each cell has a copy of your genes, which act like an instruction manual.</p></li>
+                <li><strong><img src="harmful.jpg" alt="Risk Factors Image">Exposure to Harmful Chemicals</strong> – Prolonged exposure to asbestos, benzene, and other carcinogens can increase cancer risk.<p>These studies show that radiation exposure increases the chance of getting cancer, and the risk increases as the dose increases: the higher the dose, the greater the risk. Conversely, cancer risk from radiation exposure declines as the dose falls: the lower the dose, the lower the risk.2 Oct 2024</p></li>
+                <li><strong><img src="radiation exposure.jpg" alt="Risk Factors Image">Radiation Exposure</strong> – Excessive exposure to UV radiation from the sun or tanning beds can lead to skin cancer.<p>Yes, radiation exposure, particularly ionizing radiation like X-rays and gamma rays, can damage DNA and increase the risk of developing cancer later in life, with the risk increasing as the dose increases.</p><p>Exposure to very high levels of radiation, such as being close to an atomic blast, can cause acute health effects such as skin burns and acute radiation syndrome (“radiation sickness"). It can also result in long-term health effects such as cancer and cardiovascular disease.2 Oct 2024</p></li>
+                <li><strong><img src="alcohol consumption.jpg" alt="Risk Factors Image">Alcohol Consumption</strong> – Heavy drinking is linked to liver, breast, and esophageal cancer.<p>Alcohol consumption increases the risk of developing several types of cancer, including breast, colorectal, esophageal, liver, stomach, and head and neck cancers. The risk increases with the amount of alcohol consumed, and even light to moderate drinking can raise the risk.</p><p>Drinking about 3.5 drinks a day doubles or even triples your risk of developing cancer of the mouth, pharynx, larynx and esophagus. Drinking about 3.5 drinks a day increases your risk of developing colorectal cancer and breast cancer by 1.5 times. The less alcohol you drink, the lower your cancer risk.</p></li>
+                <li><strong><img src="inflamatory.jpg" alt="Risk Factors Image">Chronic Inflammation</strong> – Conditions like chronic hepatitis or inflammatory bowel disease can increase cancer risk over time.<p>Over time, chronic inflammation can cause DNA damage and lead to cancer. For example, people with chronic inflammatory bowel diseases, such as ulcerative colitis and Crohn disease, have an increased risk of colon cancer.</p></li>
+            </ul>
+        </div>
+
+        <!-- Preventive Measures Section -->
+        <div class="section" id="preventive-measure">
+            <h2>Preventive Measures</h2>
+            <p>Taking proactive steps can significantly reduce your risk of developing cancer. Here are some preventive measures you can adopt:</p>
+            <ul>
+                <li><strong>Avoid Tobacco</strong> – Quit smoking and avoid secondhand smoke to reduce the risk of lung and other cancers.</li>
+                <li><strong>Maintain a Healthy Diet</strong> – Eat a balanced diet rich in fruits, vegetables, whole grains, and lean proteins. Limit processed foods and red meat.</li>
+                <li><strong>Exercise Regularly</strong> – Aim for at least 30 minutes of moderate physical activity most days of the week to reduce the risk of breast, colon, and prostate cancer.</li>
+                <li><strong>Limit Alcohol Consumption</strong> – If you drink alcohol, do so in moderation. For women, this means up to one drink per day, and for men, up to two drinks per day.</li>
+                <li><strong>Protect Yourself from the Sun</strong> – Use sunscreen with SPF 30 or higher, wear protective clothing, and avoid excessive sun exposure to prevent skin cancer.</li>
+                <li><strong>Get Vaccinated</strong> – Vaccines like HPV (Human Papillomavirus) and Hepatitis B can protect against cancers caused by these viruses.</li>
+                <li><strong>Regular Screenings</strong> – Early detection through regular screenings (e.g., mammograms, colonoscopies, Pap smears) can help catch cancer at an early, treatable stage.</li>
+                <li><strong>Avoid Exposure to Carcinogens</strong> – Minimize exposure to harmful chemicals and radiation in your environment.</li>
+                <li><strong>Maintain a Healthy Weight</strong> – Obesity is linked to several types of cancer, so maintaining a healthy weight through diet and exercise is crucial.</li>
+            </ul>
+            <img src="preventive-measures.jpg" alt="Preventive Measures Image"> <!-- Add an image related to preventive measures -->
+        </div>
+
+        <!-- Resources Section -->
+        <div class="section" id="RESOURCES">
+            <h2>Resources</h2>
+            <p>Here are some valuable resources to help you learn more about cancer prevention, treatment, and support:</p>
+            <ul>
+                <li><strong>World Health Organization (WHO) – Cancer Prevention</strong> – <a href="https://www.who.int/cancer/prevention/en/" target="_blank">Visit WHO Cancer Prevention</a></li>
+                <li><strong>American Cancer Society</strong> – <a href="https://www.cancer.org/" target="_blank">Visit American Cancer Society</a></li>
+                <li><strong>National Cancer Institute (NCI)</strong> – <a href="https://www.cancer.gov/" target="_blank">Visit NCI</a></li>
+                <li><strong>Cancer Research UK</strong> – <a href="https://www.cancerresearchuk.org/" target="_blank">Visit Cancer Research UK</a></li>
+                <li><strong>Local Cancer Support Groups</strong> – Check with your local hospital or community center for support groups and counseling services.</li>
+                <li><strong>Online Cancer Forums</strong> – Join online communities like <a href="https://www.cancerforums.net/" target="_blank">Cancer Forums</a> to connect with others facing similar challenges.</li>
+                <li><strong>Cancer Prevention Apps</strong> – Use apps like "My Cancer Coach" or "Cancer.Net Mobile" for tips and tracking.</li>
+                <li><strong>Books on Cancer Prevention</strong> – Consider reading books like "The Cancer-Fighting Kitchen" by Rebecca Katz or "Anticancer: A New Way of Life" by David Servan-Schreiber.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Floating Help Button -->
+    <div class="floating-help-button" onclick="toggleHelpContact()">?</div>
+
+    <!-- Help Contact Information -->
+    <div class="help-contact" id="help-contact">
+        <h4>Need Help?</h4>
+        <p>Contact us via email:</p>
+        <p><a href="mailto:Deecompanies@gmail.com">Deecompanies@gmail.com</a></p>
+        <p>Or call us at:</p>
+        <p><a href="tel:+255616863541">+255 (616) 863-541</a></p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <marquee behavior = "scroll" direction="right">
+        <p>&copy; 2025 Cancer Awareness System. Built with care by DEECOMPANIES LTD.</p>
+    </marquee>
+    </footer>
+
+    <script>
+        // Show or hide sections based on button clicks
+        function toggleSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.style.display = 'none');
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) activeSection.style.display = 'block';
+        }
+
+        // Function to add custom symptoms
+        function addCustomSymptom() {
+            const customSymptomInput = document.getElementById('custom-symptom');
+            const customSymptom = customSymptomInput.value.trim();
+
+            if (customSymptom) {
+                const symptomSelect = document.getElementById('symptom-select');
+                const newOption = document.createElement('option');
+                newOption.value = customSymptom.toLowerCase().replace(/ /g, '_');
+                newOption.textContent = customSymptom;
+                symptomSelect.appendChild(newOption);
+
+                // Clear the input field
+                customSymptomInput.value = '';
+            } else {
+                alert('Please enter a symptom.');
+            }
+        }
+
+        // Function to display selected symptoms
+        function updateSelectedSymptoms() {
+            const symptomSelect = document.getElementById('symptom-select');
+            const selectedSymptomsList = document.getElementById('selected-symptoms-list');
+            selectedSymptomsList.innerHTML = ''; // Clear the list
+
+            // Loop through selected options and display them
+            Array.from(symptomSelect.selectedOptions).forEach(option => {
+                const listItem = document.createElement('li');
+                listItem.textContent = option.textContent;
+                selectedSymptomsList.appendChild(listItem);
+            });
+        }
+
+        // Function to check symptoms and predict cancer type
+        function checkSymptoms() {
+            const symptomSelect = document.getElementById('symptom-select');
+            const selectedSymptoms = Array.from(symptomSelect.selectedOptions).map(option => option.value);
+            const result = document.getElementById('symptom-result');
+
+            if (selectedSymptoms.length === 0) {
+                result.textContent = 'Please select or add at least one symptom.';
+                return;
+            }
+
+            // Define symptoms for each type of cancer
+            const cancerTypes = {
+                breast_cancer: ['breast_lump', 'nipple_discharge', 'breast_pain', 'skin_changes_breast'],
+                lung_cancer: ['persistent_cough', 'coughing_blood', 'shortness_of_breath', 'chest_pain'],
+                prostate_cancer: ['urination_problems', 'blood_in_urine', 'erectile_dysfunction', 'pelvic_pain'],
+                skin_cancer: ['skin_lesion', 'skin_ulcer', 'itchy_skin', 'skin_redness'],
+                colon_cancer: ['bowel_changes', 'blood_in_stool', 'abdominal_pain', 'bloating']
+            };
+
+            // Check which cancer type matches the selected symptoms
+            let predictedCancer = [];
+            for (const [cancerType, symptoms] of Object.entries(cancerTypes)) {
+                if (symptoms.some(symptom => selectedSymptoms.includes(symptom))) {
+                    predictedCancer.push(cancerType.replace(/_/g, ' '));
+                }
+            }
+
+            // Display the result
+            if (predictedCancer.length > 0) {
+                result.textContent = `Based on your symptoms, you may be at risk for: ${predictedCancer.join(', ')}. Please consult a doctor for further evaluation.`;
+            } else {
+                result.textContent = 'Symptoms not conclusive. Monitor and consult if persistent.';
+            }
+        }
+
+        // Update selected symptoms list when the dropdown changes
+        document.getElementById('symptom-select').addEventListener('change', updateSelectedSymptoms);
+
+        // Toggle help contact visibility
+        function toggleHelpContact() {
+            const helpContact = document.getElementById('help-contact');
+            helpContact.style.display = helpContact.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
